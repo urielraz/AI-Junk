@@ -19,5 +19,6 @@ input.addEventListener("change", () => {
                   <span onclick="deleteImage(${index})">&times;</span>
                 </div>`
     })
+    console.log(images);
     output.innerHTML = images
  }
