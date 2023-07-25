@@ -11,7 +11,8 @@ input.addEventListener("change", () => {
     for (let i = 0; i < files.length; i++) {
         imagesArray.push(files[i])
       }
-    displayImages()
+      displayImages()
+      // selectImage(files.length-1)
  })
 
  function displayImages(){
@@ -21,9 +22,9 @@ input.addEventListener("change", () => {
                   <img src="${URL.createObjectURL(image)}" alt="image">
                   <span onclick="selectImage(${index})">&times;</span>
                 </div>`;
-               console.log(index)
+               // console.log(index)
     })
-    console.log(images);
+   //  console.log(images);
     output.innerHTML = images
     
    
