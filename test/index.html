@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Rotation with OpenCV.js</title>
+</head>
+<body>
+  <input type="file" id="fileInput" accept="image/*" multiple>
+  <button onclick="rotateLeft()">LEFT</button>
+  <button onclick="rotateRight()">RIGHT</button>
+  <input type="number" id="angleInput" value="30" min="-360" max="360">
+  ANGLE:
+  <div id="imageContainer"></div>
+  <canvas id="canvasOutput" width="400" height="300"></canvas>
+  <button onclick="rotateSelected()">Rotate Selected</button>
+
+  <script src="opencv.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
 
     <title>AI-Junk</title>
 </head>
@@ -11,12 +11,16 @@
     
     <input type="file" multiple accept="image/*">
     
-    <button id="Right">Right</button>
-    <button id="Left">Left</button>
-    <input type="number" name="" id="angle">
+    <button onclick="turnRight()" id="Right">Right</button>
+    <button onclick="turnLeft()" id="Left">Left</button>
+    <input type="number" name="" id="angle" value="30">
         
     <output></output>
+
+    <img id="bdika" width="405px" src="https://www.clfb.org.il//UploadedImages//04_2018/Monet%20Claude%20Haystack%20in%20Giverny%201889.%20HR%20JPG.jpg" alt="">
     
+    <script src="opencv.js" type="text/javascript"></script>
+    <script src="script.js"></script>
+
 </body>
-<script src="/script.js"></script>
 </html>
