@@ -58,6 +58,7 @@ function rotateSelected() {
 
 function rotateImage(degrees) {
   if (currentImageIndex >= 0 && currentImageIndex < images.length) {
+    console.log(images[currentImageIndex])
     const src = cv.imread(images[currentImageIndex]);
     if (!dst) dst = new cv.Mat();
     const dsize = new cv.Size(src.cols, src.rows);
