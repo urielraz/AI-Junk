@@ -13,14 +13,14 @@ input.addEventListener("change", () => {
     const files = input.files
     let images = ""
     for (let i = 0; i < files.length; i++) {
-        imagesArray.push(URL.createObjectURL(files[i]));
-      //   console.log(imagesArray[i])
+        imagesArray.push(`img_`);
+      //   console.log(imagesArray.i)
         images += `<div  class="image">
-        <img onclick="selectImage(event)" id="${imagesArray[i]}" src="${URL.createObjectURL(files[i])}" alt="image">
+        <img onclick="selectImage(event)" id="img_${imagesArray.length-1}" src="${URL.createObjectURL(files[i])}" alt="image">
       </div>`;
    };
    // currentImage = `img_${files.length-1}`;
-   currentImage = imagesArray.length-1;
+   currentImage = `img_${imagesArray.length-1}`;
    console.log(currentImage);
    output.innerHTML += images
 
@@ -42,14 +42,15 @@ input.addEventListener("change", () => {
 
 function selectImage(index){
    //  const select = document.querySelector(`#image_${index}`)
-    console.log(index.target)
+   currentImage = index.target.id
+   console.log(index.target.id)
    }
    
    
    function turnRight(){
     const sh = document.querySelector(`#sh`)
    console.log(imagesArray[0])
-    let src = cv.imread(sh);
+    let src = cv.imread(currentImage);
     console.log("da")
     let dst = new cv.Mat();
     let dsize = new cv.Size(src.rows, src.cols);
