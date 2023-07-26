@@ -38,22 +38,29 @@ function selectImage(index){
    currentImage = index.target.id
    console.log(index.target.id)
    }
+
+function turnLeft(){
+   rotateImage("-")
+}
+
+function turnRight(){
+   rotateImage("+")
+}
    
    
-   function turnRight(){
-   const degrees = document.querySelector("#angleInput").value
+function rotateImage(parameter){
+   const degrees = parameter + document.querySelector("#angleInput").value
+   const angle =  parseFloat(degrees)
+   console.log(typeof(angle))
+   console.log(angle)
 
-   console.log(typeof(parseFloat(degrees)))
-
-   const sh = document.querySelector(`#sh`)
    console.log(imagesArray[0])
    let src = cv.imread(currentImage);
-   console.log("da")
    let dst = new cv.Mat();
    let dsize = new cv.Size(src.rows, src.cols);
    let center = new cv.Point(src.cols / 2, src.rows / 2);
    // You can try more different parameters
-   let M = cv.getRotationMatrix2D(center, parseFloat(degrees), 1);
+   let M = cv.getRotationMatrix2D(center, angle, 1);
    cv.warpAffine(src, dst, M, dsize, cv.INTER_LINEAR, cv.BORDER_CONSTANT, new cv.Scalar());
    cv.imshow('canvasOutput', dst);
    src.delete(); dst.delete(); M.delete();
