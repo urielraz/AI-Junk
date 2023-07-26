@@ -1,9 +1,6 @@
-const input = document.querySelector("input")
+const input = document.querySelector("#fileInput")
 const output = document.querySelector("output")
-// const Right = document.querySelector("#Right")
-// const Left = document.querySelector("#Left")
-// const angle = document.querySelector("#angle")
-// const bdika = document.querySelector("#bdika")
+
 
 let currentImage = "";
 
@@ -19,14 +16,10 @@ input.addEventListener("change", () => {
         <img onclick="selectImage(event)" id="img_${imagesArray.length-1}" src="${URL.createObjectURL(files[i])}" alt="image">
       </div>`;
    };
-   // currentImage = `img_${files.length-1}`;
    currentImage = `img_${imagesArray.length-1}`;
    console.log(currentImage);
    output.innerHTML += images
 
-   
-      // displayImages()
-      // selectImage(files.length-1)
  })
 
  function displayImages(){
@@ -48,17 +41,21 @@ function selectImage(index){
    
    
    function turnRight(){
-    const sh = document.querySelector(`#sh`)
+   const degrees = document.querySelector("#angleInput").value
+
+   console.log(typeof(parseFloat(degrees)))
+
+   const sh = document.querySelector(`#sh`)
    console.log(imagesArray[0])
-    let src = cv.imread(currentImage);
-    console.log("da")
-    let dst = new cv.Mat();
-    let dsize = new cv.Size(src.rows, src.cols);
-    let center = new cv.Point(src.cols / 2, src.rows / 2);
-    // You can try more different parameters
-    let M = cv.getRotationMatrix2D(center, 45, 1);
-    cv.warpAffine(src, dst, M, dsize, cv.INTER_LINEAR, cv.BORDER_CONSTANT, new cv.Scalar());
-    cv.imshow('canvasOutput', dst);
-    src.delete(); dst.delete(); M.delete();
+   let src = cv.imread(currentImage);
+   console.log("da")
+   let dst = new cv.Mat();
+   let dsize = new cv.Size(src.rows, src.cols);
+   let center = new cv.Point(src.cols / 2, src.rows / 2);
+   // You can try more different parameters
+   let M = cv.getRotationMatrix2D(center, parseFloat(degrees), 1);
+   cv.warpAffine(src, dst, M, dsize, cv.INTER_LINEAR, cv.BORDER_CONSTANT, new cv.Scalar());
+   cv.imshow('canvasOutput', dst);
+   src.delete(); dst.delete(); M.delete();
 
  }
