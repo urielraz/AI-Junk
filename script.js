@@ -12,13 +12,13 @@ input.addEventListener("change", () => {
     for (let i = 0; i < files.length; i++) {
         imagesArray.push(`img_`);
       //   console.log(imagesArray.i)
-        images += `
-        <img style="display: block;" onclick="selectImage(event)" id="img_${imagesArray.length-1}" src="${URL.createObjectURL(files[i])}" alt="image">
-        <canvas style="display: none;" id="canvas_img_${imagesArray.length-1}"></canvas>
-
+        images += `<div  onclick="selectImage(event)">
+        <img style="display: block;" id="${imagesArray.length-1}" src="${URL.createObjectURL(files[i])}" alt="image">
+        <canvas style="display: none;"  id="canvas_${imagesArray.length-1}"></canvas>
+      </div>
       `;
    };
-   currentImage = `img_${imagesArray.length-1}`;
+   currentImage = `${imagesArray.length-1}`;
    // console.log(currentImage);
    output.innerHTML += images
 
@@ -34,11 +34,48 @@ input.addEventListener("change", () => {
     
    
  }
-
-function selectImage(index){
+// function selectCanvas(index){
+//    currentImage = parseFloat(index.target.id)
+//    currentImage += 9
+//    currentImage = currentImage.toString()
+//    console.log(currentImage)
+// }
+function selectImage(event){
    //  const select = document.querySelector(`#image_${index}`)
-   currentImage = index.target.id
-   console.log(index.target.id)
+   // currentImage = index.target.id
+   // console.log(index.target.id)
+   
+   // Get the clicked element
+   console.log(event)
+  currentImage = event.target;
+
+  // Check if the clicked element is the canvas element
+  if (currentImage.tagName === 'CANVAS') {
+    // Find the parent div element
+    var parentDiv = currentImage.parentNode;
+
+    // Find the img element inside the div
+    var imgElement = parentDiv.querySelector('img');
+
+    // Retrieve the 'id' attribute of the image
+    var imgId = imgElement.id;
+
+    // Now you can work with the 'imgId' as needed
+   //  console.log("Image ID: " + imgId);
+   
+   currentImage = imgId
+   console.log(currentImage);
+
+  } else if (currentImage.tagName === 'IMG') {
+    // If the clicked element is already the img element, directly get the 'id' attribute
+    var imgId = currentImage.id;
+
+    currentImage = imgId
+    // Now you can work with the 'imgId' as needed
+   //  console.log("Image ID: " + imgId);
+    console.log(currentImage);
+
+  }
    }
 
 function turnLeft(){
@@ -74,11 +111,11 @@ function rotateImage(parameter){
 
 
 
-   const imageElement = document.getElementById(currentImage);
-   const parentDiv = imageElement.parentElement;
+   // const imageElement = document.getElementById(currentImage);
+   // const parentDiv = imageElement.parentElement;
 
    // const parentDiv = currentImage.parentElement.nodeName;
-   console.log(parentDiv);
+   // console.log(parentDiv);
 
 
 
