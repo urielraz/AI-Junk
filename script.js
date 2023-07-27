@@ -6,21 +6,38 @@ let currentImage = "";
 
 let imagesArray = []
 
+function getRandomPosition() {
+   // Get the dimensions of the viewport
+   const viewportWidth = window.innerWidth;
+   const viewportHeight = window.innerHeight;
+ 
+   // Generate random top and left positions within the viewport
+   const randomTop = Math.floor(Math.random() * (viewportHeight - 100)); // Subtracting 100 to keep the div within the viewport
+   const randomLeft = Math.floor(Math.random() * (viewportWidth - 100)); // Subtracting 100 to keep the div within the viewport
+ 
+   return { top: randomTop, left: randomLeft };
+ }
+ 
+
 input.addEventListener("change", () => {
     const files = input.files
     let images = ""
+    
     for (let i = 0; i < files.length; i++) {
+       const randomPosition = getRandomPosition();
+
         imagesArray.push(`img_`);
       //   console.log(imagesArray.i)
-        images += `<div  onclick="selectImage(event)">
-        <img style="display: block;" id="${imagesArray.length-1}" src="${URL.createObjectURL(files[i])}" alt="image">
-        <canvas style="display: none;"  id="canvas_${imagesArray.length-1}"></canvas>
+        images += `<div style="position: absolute; top: ${randomPosition.top}px; left: ${randomPosition.left}px;"  onclick="selectImage(event)">
+        <img style="display: inline-block;" id="${imagesArray.length-1}" src="${URL.createObjectURL(files[i])}" alt="image">
+        <canvas style="display: none; "  id="canvas_${imagesArray.length-1}" ></canvas>
       </div>
       `;
    };
    currentImage = `${imagesArray.length-1}`;
    // console.log(currentImage);
    output.innerHTML += images
+   console.log(output)
 
  })
 
@@ -40,31 +57,32 @@ input.addEventListener("change", () => {
 //    currentImage = currentImage.toString()
 //    console.log(currentImage)
 // }
+
+
 function selectImage(event){
    //  const select = document.querySelector(`#image_${index}`)
    // currentImage = index.target.id
    // console.log(index.target.id)
    
    // Get the clicked element
-   console.log(event)
+   // console.log(event)
   currentImage = event.target;
 
   // Check if the clicked element is the canvas element
   if (currentImage.tagName === 'CANVAS') {
     // Find the parent div element
-    var parentDiv = currentImage.parentNode;
+    let parentDiv = currentImage.parentNode;
 
     // Find the img element inside the div
-    var imgElement = parentDiv.querySelector('img');
+    let imgElement = parentDiv.querySelector('img');
 
     // Retrieve the 'id' attribute of the image
-    var imgId = imgElement.id;
+    let imgId = imgElement.id;
 
     // Now you can work with the 'imgId' as needed
    //  console.log("Image ID: " + imgId);
    
    currentImage = imgId
-   console.log(currentImage);
 
   } else if (currentImage.tagName === 'IMG') {
     // If the clicked element is already the img element, directly get the 'id' attribute
@@ -73,13 +91,14 @@ function selectImage(event){
     currentImage = imgId
     // Now you can work with the 'imgId' as needed
    //  console.log("Image ID: " + imgId);
-    console.log(currentImage);
-
-  }
+   
+}
+console.log(currentImage);
    }
 
 function turnLeft(){
    rotateImage("-")
+   console.log(output)
 }
 
 function turnRight(){
@@ -106,8 +125,8 @@ function rotateImage(parameter){
    cv.imshow(canvas, dst);
    src.delete(); dst.delete(); M.delete();
 
-   canvas.style.display = "block";
    document.getElementById(currentImage).style.display = "none";
+   canvas.style.display = "inline-block";
 
 
 
