@@ -9,13 +9,21 @@ output{
     border-radius: 5px;
   }
   
-  output .image{
+img{
     height: 150px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     position: relative;
   }
+canvas{
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    position: relative;
+  }
+
   
   output .image img{
     height: 100%;
