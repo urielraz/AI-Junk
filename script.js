@@ -18,6 +18,7 @@ function getRandomPosition() {
 
 input.addEventListener("change", () => {
     const files = input.files
+    console.log(output.innerHTML);
     let images = ""
     
     for (let i = 0; i < files.length; i++) {
@@ -27,7 +28,7 @@ input.addEventListener("change", () => {
 
         images += `<div class="images" style="position: absolute; top: ${randomPosition.top}px; left: ${randomPosition.left}px;"  onclick="selectImage(event)">
         <img style="display: block;" id="${imagesArray.length-1}" src="${URL.createObjectURL(files[i])}" alt="image">
-        <canvas style="display: none;"   id="canvas_${imagesArray.length-1}" ></canvas>
+        <canvas  height:150px;"   id="canvas_${imagesArray.length-1}" ></canvas>
       </div>
       `;
    };
@@ -76,6 +77,7 @@ function rotateImage(parameter){
    src.delete(); dst.delete(); M.delete();
 
    document.getElementById(currentImage).style.display = "none";
-   canvas.style.display = "block";
+   // canvas.style.display = "block";
+ 
 
  }
