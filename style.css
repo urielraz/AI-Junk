@@ -1,9 +1,11 @@
 div{
   height: 200px;
   /* width: 150px; */
+  padding: 25px;
+  box-sizing: border-box;
 }
 
-output{
+output .image{
     width: 100%;
     min-height: 150px;
     display: flex;
@@ -16,17 +18,19 @@ output{
   
 img{
     height: 150px;
-
+  
   }
 canvas{
     height: 150px;
+    
+    
   }
 
   
-  output .image img{
+  /* output .image img{
     height: 100%;
     width: 100%;
-  }
+  } */
   
   output .image span {
     position: absolute;

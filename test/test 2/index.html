@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Your CSS styles can be placed here -->
+</head>
+<body>
+  <input type="file" id="fileInput">
+  <output></output>
+
+  <script>
+    let imagesData = [];
+
+    function getRandomPosition() {
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const randomTop = Math.floor(Math.random() * (viewportHeight - 100));
+      const randomLeft = Math.floor(Math.random() * (viewportWidth - 100));
+      return { top: randomTop, left: randomLeft };
+    }
+
+    function createImageElement(file, index) {
+      const randomPosition = getRandomPosition();
+      const imageObjectURL = URL.createObjectURL(file);
+
+      const div = document.createElement('div');
+      div.classList.add('images');
+      div.style.position = 'absolute';
+      div.style.top = `${randomPosition.top}px`;
+      div.style.left = `${randomPosition.left}px`;
+
+      const img = document.createElement('img');
+      img.style.display = 'block';
+      img.id = `img_${index}`;
+      img.src = imageObjectURL;
+      img.alt = 'image';
+      div.appendChild(img);
+
+      const canvas = document.createElement('canvas');
+      canvas.style.display = 'none';
+      canvas.id = `canvas_${index}`;
+      div.appendChild(canvas);
+
+      imagesData.push({ file, canvas });
+
+      div.addEventListener('click', () => selectImage(index));
+
+      return div;
+    }
+
+    function displayImages() {
+      const output = document.querySelector('output');
+      output.innerHTML = '';
+      imagesData.forEach((imageData, index) => {
+        const imageElement = createImageElement(imageData.file, index);
+        output.appendChild(imageElement);
+      });
+    }
+
+    function selectImage(index) {
+      console.log(`Selected Image ID: img_${index}`);
+    }
+
+    function rotateImage(parameter) {
+      const index = currentImage;
+      const canvas = imagesData[index].canvas;
+      // ... rest of the code for rotating the image ...
+    }
+
+    // Your OpenCV-related code can be added here
+
+    const input = document.querySelector("#fileInput");
+    input.addEventListener("change", () => {
+      const files = input.files;
+      for (let i = 0; i < files.length; i++) {
+        createImageElement(files[i], i);
+      }
+      displayImages();
+    });
+  </script>
+</body>
+</html>

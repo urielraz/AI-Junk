@@ -28,9 +28,9 @@ input.addEventListener("change", () => {
 
         imagesArray.push(`img_`);
       //   console.log(imagesArray.i)
-        images += `<div style="position: absolute; top: ${randomPosition.top}px; left: ${randomPosition.left}px;"  onclick="selectImage(event)">
-        <img style="display: inline-block;" id="${imagesArray.length-1}" src="${URL.createObjectURL(files[i])}" alt="image">
-        <canvas style="display: none; "  id="canvas_${imagesArray.length-1}" ></canvas>
+        images += `<div class="images" style="position: absolute; top: ${randomPosition.top}px; left: ${randomPosition.left}px;"  onclick="selectImage(event)">
+        <img style="display: block;" id="${imagesArray.length-1}" src="${URL.createObjectURL(files[i])}" alt="image">
+        <canvas style="display: none;"   id="canvas_${imagesArray.length-1}" ></canvas>
       </div>
       `;
    };
@@ -126,7 +126,7 @@ function rotateImage(parameter){
    src.delete(); dst.delete(); M.delete();
 
    document.getElementById(currentImage).style.display = "none";
-   canvas.style.display = "inline-block";
+   canvas.style.display = "block";
 
 
 
