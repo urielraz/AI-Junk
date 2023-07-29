@@ -20,21 +20,23 @@ function addImageToOutput(file, index){
 
    const divElement = document.createElement('div');
    //   divElement.className = 'images';
-   divElement.style.position = 'absolute';
+   // divElement.style.position = 'absolute';
    divElement.style.top = randomPosition.top + 'px';
    divElement.style.left = randomPosition.left + 'px';
    // divElement.style.height = '350px';
+   // divElement.style.width = '350px';
    divElement.onclick = selectImage;
    
    const imgElement = document.createElement('img');
    imgElement.id = index;
    imgElement.src = URL.createObjectURL(file);
-   imgElement.style.height = '250px';
+   // imgElement.style.height = '150px';
    imgElement.alt = 'image';
-
+   
    const canvasElement = document.createElement('canvas');
    canvasElement.style.display = 'none';
-   canvasElement.style.height = '250px';
+   // canvasElement.style.height = '300px';
+   // canvasElement.style.minHeight = imgElement.style.width;
    canvasElement.id = 'canvas_' + (index);
 
    divElement.appendChild(imgElement);
@@ -45,6 +47,7 @@ function addImageToOutput(file, index){
  
 input.addEventListener("change", () => {
     const files = input.files
+    
     for (let i = 0; i < files.length; i++) {
       imagesArray.push(`img_`);
       addImageToOutput(files[i], imagesArray.length - 1)
@@ -71,9 +74,9 @@ function rotateImage(parameter){
 
    let src = cv.imread(currentImage);
    let dst = new cv.Mat();
-   let dsize = new cv.Size(src.rows, src.cols);
+   let dsize = new cv.Size(src.rows, src.rows);
    let center = new cv.Point(src.cols / 2, src.rows / 2);
-   let M = cv.getRotationMatrix2D(center, angle, 1);
+   let M = cv.getRotationMatrix2D(center, angle, 0.5);
    cv.warpAffine(src, dst, M, dsize, cv.INTER_LINEAR, cv.BORDER_CONSTANT, new cv.Scalar());
    cv.imshow(canvas, dst);
    src.delete(); dst.delete(); M.delete();
@@ -84,10 +87,10 @@ function rotateImage(parameter){
  }
 
  function turnLeft(){
-   rotateImage("-")
+   rotateImage("+")
 }
 
 function turnRight(){
-   rotateImage("+")
+   rotateImage("-")
 }
    

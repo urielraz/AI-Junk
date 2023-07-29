@@ -1,7 +1,17 @@
-/* img{
+img{
   height: 150px;
-
-} */
+  margin: 80px;
+  cursor: pointer ;
+}
+div{
+  height: 350px;
+  width: 350px;
+  position: absolute;
+}
+canvas{
+  height: 300px;
+  cursor: pointer ;
+}
 
 /* canvas{
   height: 150px;

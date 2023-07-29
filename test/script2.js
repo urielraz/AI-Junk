@@ -1,67 +1,38 @@
-let images = [];
-let selectedImageIndex = -1;
 
-function onOpenCvReady() {
-    document.getElementById('fileInput').disabled = false;
-}
-
-function loadImage(input) {
-    if (input.files && input.files[0]) {
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            let img = document.createElement('img');
-            img.src = e.target.result;
-            img.onclick = function () {
-                selectedImageIndex = images.indexOf(this);
-                drawImages();
-            };
-            images.push(img);
-            drawImages();
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-function loadImages() {
-    let fileInput = document.getElementById('fileInput');
-    for (let i = 0; i < fileInput.files.length; i++) {
-        loadImage({ files: [fileInput.files[i]] });
-    }
-}
-
-function drawImages() {
-    let imagesContainer = document.getElementById('imagesContainer');
-    imagesContainer.innerHTML = '';
-    images.forEach((img) => {
-        imagesContainer.appendChild(img);
-    });
-}
-
-function rotateImage(angle) {
-    if (selectedImageIndex !== -1) {
-        let src = cv.imread(images[selectedImageIndex]);
-        let dst = new cv.Mat();
-        let dsize = new cv.Size(src.cols, src.rows);
-        let center = new cv.Point(src.cols / 2, src.rows / 2);
-        let M = cv.getRotationMatrix2D(center, angle, 1);
-        cv.warpAffine(src, dst, M, dsize, cv.INTER_LINEAR, cv.BORDER_CONSTANT, new cv.Scalar());
-        cv.imshow(images[selectedImageIndex], dst);
-        src.delete();
-        dst.delete();
-        M.delete();
-    }
-}
-
-function rotateImageLeft() {
-    let angleInput = document.getElementById('angle');
-    let angle = parseFloat(angleInput.value) - 45;
-    angleInput.value = angle;
-    rotateImage(angle);
-}
-
-function rotateImageRight() {
-    let angleInput = document.getElementById('angle');
-    let angle = parseFloat(angleInput.value) + 45;
-    angleInput.value = angle;
-    rotateImage(angle);
-}
+function rotateImage(parameter){
+    const canvas = document.getElementById(`canvas_${currentImage}`);
+    const imgElement = document.getElementById(currentImage);
+  
+    const degrees = parameter + parseFloat(document.querySelector("#angleInput").value);
+    const angle = degrees * (Math.PI / 180); // Convert degrees to radians
+  
+    const ctx = canvas.getContext("2d");
+  
+    // Save the current canvas state
+    ctx.save();
+  
+    // Clear the canvas and set the canvas size to match the rotated image
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+    const rotatedWidth = Math.abs(Math.cos(angle)) * imgElement.width + Math.abs(Math.sin(angle)) * imgElement.height;
+    const rotatedHeight = Math.abs(Math.sin(angle)) * imgElement.width + Math.abs(Math.cos(angle)) * imgElement.height;
+  3
+    canvas.width = rotatedWidth;
+    canvas.height = rotatedHeight;
+  
+    // Translate the canvas context to the center point
+    ctx.translate(rotatedWidth / 2, rotatedHeight / 2);
+  
+    // Rotate the canvas context
+    ctx.rotate(angle);
+  
+    // Draw the rotated image on the canvas
+    ctx.drawImage(imgElement, -imgElement.width / 2, -imgElement.height / 2, imgElement.width, imgElement.height);
+  
+    // Restore the canvas state
+    ctx.restore();
+ 
+    document.getElementById(currentImage).style.display = "none";
+    canvas.style.display = "block";
+  
+  }
