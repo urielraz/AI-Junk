@@ -1,7 +1,7 @@
 const input = document.querySelector("#fileInput")
 const output = document.querySelector("output")
 
-let currentImage = "";
+let currentImage = -1;
 
 const imagesArray = []
 
@@ -26,14 +26,38 @@ input.addEventListener("change", () => {
 
         imagesArray.push(`img_`);
 
-        images += `<div class="images" style="position: absolute; top: ${randomPosition.top}px; left: ${randomPosition.left}px;"  onclick="selectImage(event)">
-        <img style="display: block;" id="${imagesArray.length-1}" src="${URL.createObjectURL(files[i])}" alt="image">
-        <canvas  height:150px;"   id="canvas_${imagesArray.length-1}" ></canvas>
-      </div>
-      `;
+        const divElement = document.createElement('div');
+      //   divElement.className = 'images';
+        divElement.style.position = 'absolute';
+        divElement.style.top = randomPosition.top + 'px';
+        divElement.style.left = randomPosition.left + 'px';
+        divElement.onclick = selectImage;
+      
+        // Create the image element
+        const imgElement = document.createElement('img');
+        imgElement.id = imagesArray.length - 1;
+        imgElement.src = URL.createObjectURL(files[i]);
+        imgElement.alt = 'image';
+      
+        // Create the canvas element
+        const canvasElement = document.createElement('canvas');
+        canvasElement.style.display = 'none';
+      //   canvasElement.style.height = '150px';
+        canvasElement.id = 'canvas_' + (imagesArray.length - 1);
+      
+        // Append the image and canvas elements to the outer div
+        divElement.appendChild(imgElement);
+        divElement.appendChild(canvasElement);
+
+        output.appendChild(divElement);
+      //   images += `<div class="images" style="position: absolute; top: ${randomPosition.top}px; left: ${randomPosition.left}px;"  onclick="selectImage(event)">
+      //   <img  id="${imagesArray.length-1}" src="${URL.createObjectURL(files[i])}" alt="image">
+      //   <canvas style="display: none;" height:150px;"   id="canvas_${imagesArray.length-1}" ></canvas>
+      // </div>
+      // `;
    };
    currentImage = `${imagesArray.length-1}`;
-   output.innerHTML += images
+   // output.innerHTML += images
    console.log(output)
 
  })
@@ -77,7 +101,7 @@ function rotateImage(parameter){
    src.delete(); dst.delete(); M.delete();
 
    document.getElementById(currentImage).style.display = "none";
-   // canvas.style.display = "block";
+   canvas.style.display = "block";
  
 
  }

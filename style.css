@@ -1,6 +1,17 @@
-div{
+img{
+  height: 150px;
+
+}
+
+canvas{
+  height: 150px;
+  
+  
+}
+
+/* div{
   height: 200px;
-  /* width: 150px; */
+  width: 150px;
   padding: 25px;
   box-sizing: border-box;
 }
@@ -16,15 +27,8 @@ output .image{
     
   }
   
-img{
-    height: 150px;
-  
-  }
-canvas{
-    height: 150px;
-    
-    
-  }
+
+ */
 
   
   /* output .image img{
