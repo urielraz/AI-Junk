@@ -19,24 +19,21 @@ function addImageToOutput(file, index){
    const randomPosition = getRandomPosition();
 
    const divElement = document.createElement('div');
-   //   divElement.className = 'images';
-   // divElement.style.position = 'absolute';
+   
    divElement.style.top = randomPosition.top + 'px';
    divElement.style.left = randomPosition.left + 'px';
-   // divElement.style.height = '350px';
-   // divElement.style.width = '350px';
+   
    divElement.onclick = selectImage;
    
    const imgElement = document.createElement('img');
    imgElement.id = index;
    imgElement.src = URL.createObjectURL(file);
-   // imgElement.style.height = '150px';
+   
    imgElement.alt = 'image';
    
    const canvasElement = document.createElement('canvas');
    canvasElement.style.display = 'none';
-   // canvasElement.style.height = '300px';
-   // canvasElement.style.minHeight = imgElement.style.width;
+   
    canvasElement.id = 'canvas_' + (index);
 
    divElement.appendChild(imgElement);

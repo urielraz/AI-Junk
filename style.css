@@ -12,37 +12,3 @@ canvas{
   height: 300px;
   cursor: pointer ;
 }
-
-/* canvas{
-  height: 150px;
-  
-  
-} */
-
-/* div{
-  height: 200px;
-  width: 150px;
-  padding: 25px;
-  box-sizing: border-box;
-}
-
-output .image{
-    width: 100%;
-    min-height: 150px;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 15px;
-    border-radius: 5px;
-    
-  }
-  
-
- */
-
-  
-  /* output .image img{
-    height: 100%;
-    width: 100%;
-  } */
-  
